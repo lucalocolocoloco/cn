@@ -1,6 +1,6 @@
 #config
 
-apt update && apt install openvpn npm -y && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - &&  apt install -y nodejs 
+apt update && apt install openvpn npm nodejs -y 
 
 #runing
 
