@@ -9,8 +9,6 @@ if ! id -u xb &>/dev/null; then
     sudo usermod -aG sudo xb
 fi
 
-npm init -y 
-npm install dotenv
 # Menunggu selama 4 detik untuk memastikan proses lain siap
 sleep 4
 
