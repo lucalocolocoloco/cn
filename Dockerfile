@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install paket yang diperlukan
 RUN apt update && apt upgrade -y && \
     apt install -y --no-install-recommends \
-    wget gcc curl python3 sudo git openvpn && \
+    wget curl python3 sudo git openvpn && \
     apt-get clean
 
 # Tambahkan Node.js dan npm
@@ -15,7 +15,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get clean
 
 # Verifikasi pemasangan Node.js dan npm
-RUN node -v && npm -v
+RUN echo "Node.js version:" && node -v && \
+    echo "npm version:" && npm -v
 
 # Membuat pengguna baru dan menyiapkan lingkungan
 RUN useradd -m coder && \
