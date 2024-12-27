@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install paket yang diperlukan
 RUN apt update && apt upgrade -y && \
     apt install -y --no-install-recommends \
-    wget curl python3 sudo git openvpn && \
+    wget curl python3 sudo git openvpn npm && \
     apt-get clean
 
 # Tambahkan Node.js dan npm
