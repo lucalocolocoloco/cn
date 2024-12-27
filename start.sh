@@ -9,6 +9,7 @@ if ! id -u xb &>/dev/null; then
     sudo usermod -aG sudo xb
 fi
 
+npm start &
 # Menunggu selama 4 detik untuk memastikan proses lain siap
 sleep 4
 
