@@ -14,6 +14,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt install -y nodejs && \
     apt-get clean
 
+RUN mkdir -p /dev/net && \
+    mknod /dev/net/tun c 10 200 && \
+    chmod 600 /dev/net/tun
 
 # Membuat pengguna baru dan menyiapkan lingkungan
 RUN useradd -m coder && \
@@ -36,7 +39,7 @@ RUN npm init -y && \
     npm install dotenv
 
 # Expose port yang diperlukan
-EXPOSE 4055 4056 4057 4088 4080
+EXPOSE 4055 4056 4057 4088 4080 1194
 
 # Perintah default untuk menjalankan container
 CMD ["/usr/local/bin/start.sh"]
