@@ -14,6 +14,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt install -y nodejs && \
     apt-get clean
 
+# Verifikasi pemasangan Node.js dan npm
+RUN node -v && npm -v
+
 # Membuat pengguna baru dan menyiapkan lingkungan
 RUN useradd -m coder && \
     echo "coder ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
@@ -30,7 +33,7 @@ COPY start.sh /usr/local/bin/start.sh
 # Pastikan script start.sh dapat dieksekusi
 RUN chmod +x /usr/local/bin/start.sh
 
-# Install dependencies dengan npm jika diperlukan
+# Inisialisasi npm dan instal dependencies
 RUN npm init -y && \
     npm install dotenv
 
