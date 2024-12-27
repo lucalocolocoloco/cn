@@ -6,11 +6,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install paket yang diperlukan
 RUN apt update && apt upgrade -y && \
     apt install -y --no-install-recommends \
-    wget gcc curl python3 sudo git nodejs openvpn \
-    && apt-get clean
-    
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-    
+    wget gcc curl python3 sudo git openvpn && \
+    apt-get clean
+
+# Tambahkan Node.js dan npm
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt install -y nodejs && \
+    apt-get clean
 
 # Membuat pengguna baru dan menyiapkan lingkungan
 RUN useradd -m coder && \
@@ -19,13 +21,21 @@ RUN useradd -m coder && \
 
 WORKDIR /home/coder/project
 
-# Copy dan siapkan start script
+# Copy file yang diperlukan
 COPY server.js /home/coder/project/server.js
 COPY .env /home/coder/project/.env
 COPY filocn.filoch.ovpn /home/coder/project/filocn.filoch.ovpn
 COPY start.sh /usr/local/bin/start.sh
+
+# Pastikan script start.sh dapat dieksekusi
 RUN chmod +x /usr/local/bin/start.sh
 
+# Install dependencies dengan npm jika diperlukan
+RUN npm init -y && \
+    npm install dotenv
+
+# Expose port yang diperlukan
 EXPOSE 4055 4056 4057 4088 4080
 
+# Perintah default untuk menjalankan container
 CMD ["/usr/local/bin/start.sh"]
