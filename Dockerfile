@@ -14,9 +14,6 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt install -y nodejs && \
     apt-get clean
 
-# Verifikasi pemasangan Node.js dan npm
-RUN echo "Node.js version:" && node -v && \
-    echo "npm version:" && npm -v
 
 # Membuat pengguna baru dan menyiapkan lingkungan
 RUN useradd -m coder && \
